@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from cakes.models import Frozen_cakes, Birthday_cakes,Alfajores
+
+admin.site.register(Alfajores)
