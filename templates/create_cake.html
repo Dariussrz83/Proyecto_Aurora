@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    Creacion de Tortas 
+{%endblock%}
+
+{% block content%}
+    <h1> Esta a un paso de crear su Torta </h1>
+
+    {% if request.method == "GET"%}
+
+    <form action="" method='POST'>
+
+        {% csrf_token %}
+
+        <p> Nombre: <input type="text" name="name"> </p>
+        <p> Precio: <input type="number" name="price"> </p>
+
+        <input type="submit" value= "Crear torta">
+
+    {%else%}
+    <p> Torta Creada</p>
+    {% endif%}
+
+{% endblock%}

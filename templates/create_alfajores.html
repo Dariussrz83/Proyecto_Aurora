@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    Creacion Alfajores
+{%endblock%}
+
+{% block content%}
+    <h1> Crea tu alfajor </h1>
+
+    {% if form %}
+
+    <form action="" method='POST'>
+
+        {% csrf_token %}
+
+        <table>
+            {{form}}
+        </table>
+
+        <input type="submit" value= "Crear alfajor">
+
+   
+    {% endif%}
+
+        {% if form_errors %}
+                {{form_errors}}
+        {% endif %}
+
+
+    {% endblock%}

@@ -6,6 +6,7 @@
 {%block content%}
 <body>
     <h1> Listado de Alfajores</h1>
+    <h2> Crear nuevo alfajor </h2> <a href="/cakes/create-alfajores/" class="btn btn-primary"> Crear</a>
 
     {% for alfajores in alfajores%}
 
@@ -16,8 +17,10 @@
           <p class="card-text">Precio: {{alfajores.price}}</p>
           {% if alfajores.stock == False%}
           <p> No contamos con stock </p>
+            {% else %}
+            <p>Contamos con stock </p>
           {%endif%}
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <a href="#" class="btn btn-primary">Comprar</a>
         </div>
       </div>
 

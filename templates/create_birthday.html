@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    Creacion de Tortas de Cumpleaños
+{%endblock%}
+
+{% block content%}
+    <h1> Esta a un paso de crear su Torta de cumpleaños </h1>
+
+    {% if form %}
+
+    <form action="" method='POST'>
+
+        {% csrf_token %}
+
+        <table>
+            {{form}}
+        </table>
+
+        <input type="submit" value= "Crear torta">
+
+   
+    {% endif%}
+
+        {% if form_errors %}
+                {{form_errors}}
+        {% endif %}
+
+
+    {% endblock%}
