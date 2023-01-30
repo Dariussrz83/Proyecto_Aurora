@@ -63,6 +63,79 @@ def list_birthday(request):
     return render(request, 'list_birthday.html',context=context )
 
 
+
+def birthday_update(request,pk):
+    birthday = Birthday_cakes.objects.get(id=pk)
+
+    if request.method == 'GET':
+        context = {
+            'form': Birthday_cakesForm(
+                initial={
+                    'name':birthday.name,
+                    'price':birthday.price,
+                    'stock':birthday.stock,
+                    
+                }
+            )
+        }
+
+        return render(request, 'update_birthday.html', context=context)
+
+    elif request.method == 'POST':
+        form = Birthday_cakes(request.POST)
+        if form.is_valid():
+            birthday.name = form.cleaned_data['name']
+            birthday.price= form.cleaned_data['price']
+            birthday.stock= form.cleaned_data['stock']
+            birthday.save()
+            
+            context = {
+                'message': 'Torta de cumpleaños actualizada'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': Birthday_cakesForm()
+            }
+        return render(request, 'update_birthday.html', context=context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def create_alfajores(request):
    if request.method == 'GET':
        context = {
