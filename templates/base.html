@@ -19,15 +19,30 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="/cakes/list-cakes/">Cakes<span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/cakes/list-cakes/">Frozen Cakes<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/cakes/list-birthday">Birthday</a>
                 </li>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="margin-right: 550px;">
                   <a class="nav-link" href="/cakes/list-alfajores">Alfajores</a>
                 </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/logout/">Logout</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/update/">{{request.user.username}}</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/login/">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/signup/">Signup</a>
+                </li>
+                {% endif %}
               </ul>
               <form class="form-inline my-2 my-lg-0" action="/cakes/list-cakes/" method="GET">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
@@ -42,6 +57,46 @@
 
    {% endblock %}
 
+    <div class="container-fluid">
+
+        <div class="row p-5 bg-dark text-white">
+
+              <div class="col-xs-12 col-md-6 col-lg-3">
+                  <p class="h5 mb_3">Aurora Bakery</p>
+                  <a class="text-secondary text-decoration-none" href="/cakes/about/">Nuestra Historia</a>
+              </div>
+              <div class="col-xs-12 col-md-6 col-lg-3">
+                  <p class="h5 mb_3">Productos</p>
+                  <div class="mb-2">
+                  <a class="text-secondary text-decoration-none" href="/cakes/list-cakes/">Frozen Cakes</a>
+                  </div>
+                  <div class="mb-2">
+                  <a class="text-secondary text-decoration-none" href="/cakes/list-birthday">Birthday Cakes</a>
+                  </div>
+                  <div class="mb-2">
+                  <a class="text-secondary text-decoration-none" href="/cakes/list-alfajores">Alfajores</a>
+                  </div>
+              </div>
+              <div class="col-xs-12 col-md-6 col-lg-3">
+                  <p class="h5 mb-3">Links</p>
+                  <div class="mb-2">
+                    <a class="text-secondary text-decoration-none" href="#">Terminos y condiciones</a>
+                  </div>
+                  <div class="mb-2">
+                    <a class="text-secondary text-decoration-none" href="#">Privacy Policy</a>
+                  </div>
+                </div>  
+              <div class="col-xs-12 col-md-6 col-lg-3">
+                  <p class="h5">Contacto</p>
+                  <div class="mb-2">
+                    <a class="text-secondary text-decoration-none" href="#">Instagram</a>
+                  </div>
+                  <div class="mb-2">
+                    <a class="text-secondary text-decoration-none" href="#">Facebook</a>
+                  </div>
+              </div>
+        </div>    
+    </div>      
 
     
    

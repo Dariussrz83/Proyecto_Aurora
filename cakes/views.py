@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from cakes.models import Frozen_cakes,Birthday_cakes, Alfajores
-from cakes.forms import Birthday_cakesForm, AlfajoresForm
+from cakes.forms import Birthday_cakesForm, AlfajoresForm,Frozen_cakesForm
+from django.views.generic import DeleteView
 
 
 
@@ -30,6 +31,49 @@ def list_cakes(request):
     }
     return render(request, 'list_cakes.html', context=context)
 
+def cakes_update(request,pk):
+    frozen_cakes = Frozen_cakes.objects.get(id=pk)
+
+    if request.method == 'GET':
+        context = {
+            'form': Frozen_cakesForm(
+                initial={
+                    'name':frozen_cakes.name,
+                    'price':frozen_cakes.price,
+                    'stock':frozen_cakes.stock,
+                    
+                }
+            )
+        }
+
+        return render(request, 'update_cakes.html', context=context)
+
+    elif request.method == 'POST':
+        form = Frozen_cakesForm(request.POST)
+        if form.is_valid():
+            frozen_cakes.name = form.cleaned_data['name']
+            frozen_cakes.price= form.cleaned_data['price']
+            frozen_cakes.stock= form.cleaned_data['stock']
+            frozen_cakes.save()
+            
+            context = {
+                'message': 'Torta de cumpleaños actualizada'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': Frozen_cakesForm()
+            }
+        return render(request, 'update_cakes.html', context=context)
+    
+    
+    
+class Frozen_cakesDeleteView(DeleteView):
+    model = Frozen_cakes
+    template_name = 'delete_cakes.html'
+    success_url = '/cakes/list-cakes/'
+        
+    
 
 def create_birthday(request):
    if request.method == 'GET':
@@ -82,7 +126,7 @@ def birthday_update(request,pk):
         return render(request, 'update_birthday.html', context=context)
 
     elif request.method == 'POST':
-        form = Birthday_cakes(request.POST)
+        form = Birthday_cakesForm(request.POST)
         if form.is_valid():
             birthday.name = form.cleaned_data['name']
             birthday.price= form.cleaned_data['price']
@@ -98,44 +142,14 @@ def birthday_update(request,pk):
                 'form': Birthday_cakesForm()
             }
         return render(request, 'update_birthday.html', context=context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
+class Birthday_cakesDeleteView(DeleteView):
+    model = Birthday_cakes
+    template_name = 'delete_birthday.html'
+    success_url = '/cakes/list-birthday/'   
+    
+    
 def create_alfajores(request):
    if request.method == 'GET':
        context = {
@@ -166,3 +180,46 @@ def list_alfajores(request):
     }
     return render(request,'list_alfajores.html', context=context)
 
+def alfajores_update(request, pk):
+    alfajores = Alfajores.objects.get(id=pk)
+
+    if request.method == 'GET':
+        context = {
+            'form': AlfajoresForm(
+                initial={
+                    'name':alfajores.name,
+                    'price':alfajores.price,
+                    'stock':alfajores.stock,
+                }
+            )
+        }
+
+        return render(request, 'update_alfajores.html', context=context)
+
+    elif request.method == 'POST':
+        form = AlfajoresForm(request.POST)
+        if form.is_valid():
+            alfajores.name = form.cleaned_data['name']
+            alfajores.price= form.cleaned_data['price']
+            alfajores.stock= form.cleaned_data['stock']
+            alfajores.save()
+            
+            context = {
+                'message': 'Alfajor actualizado exitosamente'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': AlfajoresForm()
+            }
+        return render(request, 'update_alfajores.html', context=context)
+
+class AlfajoresDeleteView(DeleteView):
+    model = Alfajores
+    template_name = 'delete_alfajores.html'
+    success_url = '/cakes/list-alfajores/'  
+    
+    
+    
+def about(request):
+    return render(request,'about.html', context={})

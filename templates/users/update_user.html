@@ -1,11 +1,11 @@
 {% extends 'base.html'%}
 
 {% block title %}
-    Actualizacion de Tortas de Cumpleaños
+ Actualizacio de Usuario
 {%endblock%}
 
 {% block content%}
-    <h1> Actualizar Torta de cumpleaños </h1>
+    <h3> Por favor completa los campos que desees cambiar </h3>
 
     {% if form %}
 
@@ -14,19 +14,21 @@
         {% csrf_token %}
 
         <table>
-            {{form}}
+            {{form.as_table}}
         </table>
 
+            
+    
+
         <input type="submit" value= "Actualizar">
-        
 
-    {%else%}
-    <p> Torta actualizada</p>
-    {% endif%}
+     {% endif %}
 
-        {% if form_errors %}
-                {{form_errors}}
-        {% endif %}
+    {% if errors %}
+    
+            {{errors}}
+               
 
+    {% endif %}    
 
     {% endblock%}

@@ -25,5 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cakes/',include('cakes.urls')),
     path('',index,name='index'),
+    path('users/',include('users.urls')),
    
 ]

@@ -4,7 +4,11 @@
 
 <body>
     <h1> Listado de Tortas de Cumpleaños</h1>
+    {% if request.user.is_authenticated%}
+      {% if request.user.is_superuser or request.user.is_staff %}
     <h2> Crear nueva torta </h2> <a href="/cakes/create-birthday/" class="btn btn-primary"> Crear</a>
+      {%endif%}
+    {%endif%}
     {% for birthday in birthday%}
 
 
@@ -17,7 +21,17 @@
           <p>Contamos con stock</p>
           {% endif %}
           <a href="#" class="btn btn-primary">Comprar</a>
+          {% if request.user.is_authenticated%}
+            {% if request.user.is_superuser or request.user.is_staff %}
           <a href="/cakes/update-birthday/{{birthday.id}}/" class="btn btn-primary">Actualizar</a>
+            {%endif%}
+          {%endif%}
+          <p></p>
+          {% if request.user.is_authenticated%}
+            {% if request.user.is_superuser or request.user.is_staff %}
+          <a href="/cakes/delete-birthday/{{birthday.id}}/"class="btn btn-danger">Borrar</a>
+            {%endif%}
+          {%endif%}
         </div>
       </div>
 
