@@ -223,3 +223,6 @@ class AlfajoresDeleteView(DeleteView):
     
 def about(request):
     return render(request,'about.html', context={})
+
+
+

@@ -4,6 +4,7 @@ class Frozen_cakes(models.Model):
     name = models.CharField(max_length= 100)
     price = models.FloatField(blank=False)
     stock = models.BooleanField(default=True)
+    imagen = models.ImageField(upload_to="productos", null=True, blank=True)
     
     def __str__(self):
         return self.name
@@ -17,6 +18,7 @@ class Birthday_cakes(models.Model):
     name = models.CharField(max_length= 50)
     price = models.FloatField()
     stock = models.BooleanField(default=True)
+    imagen = models.ImageField(upload_to="productos", null=True,blank= True)
     
     def __str__(self):
         return self.name
@@ -32,6 +34,7 @@ class Alfajores(models.Model):
     name = models.CharField (max_length=50)
     price = models.FloatField()
     stock = models.BooleanField()
+    imagen = models.ImageField(upload_to="productos", null=True, blank=True)
     
     def __str__(self):
         return self.name

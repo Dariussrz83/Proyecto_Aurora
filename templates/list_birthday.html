@@ -3,17 +3,19 @@
 {%block content%}
 
 <body>
-    <h1> Listado de Tortas de Cumpleaños</h1>
+    <h1 style="text-align:center;"> Listado de Tortas de Cumpleaños</h1>
     {% if request.user.is_authenticated%}
       {% if request.user.is_superuser or request.user.is_staff %}
-    <h2> Crear nueva torta </h2> <a href="/cakes/create-birthday/" class="btn btn-primary"> Crear</a>
+    <h2 style="text-align:center;"> Crear nueva torta </h2><div style="text-align:center;"> <a href="/cakes/create-birthday/" class="btn btn-primary"> Crear</a></div>
       {%endif%}
     {%endif%}
-    {% for birthday in birthday%}
 
-
-    <div class="card" style="width: 18rem;">
-        <img src="https://mysuenos.com/wp-content/uploads/2019/07/torta-cumpleanos.jpg" class="card-img-top" alt="...">
+    <div class="d-flex" style="margin-top:5rem; margin-left:7rem">
+      {% for birthday in birthday%}
+      <div class="card" style="width: 18rem;">  
+        {% if birthday.imagen %}
+        <img src="{{birthday.imagen.url}}" class="card-img-top">
+        {% endif %}
         <div class="card-body">
           <h5 class="card-title">Torta: {{birthday.name}}</h5>
           <p class="card-text">Precio: {{birthday.price}}</p>
@@ -37,8 +39,8 @@
 
        
         
-    {% endfor %}
-
+      {% endfor %}
+    </div>  
 
  {%endblock%}
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
